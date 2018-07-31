@@ -1,9 +1,9 @@
 #!/bin/bash
 #
 # Prompt for SigSci Credentials and stores them in your OSX keychain 
-# Use this with the sigsci  script.
+# 
 
-# Abort if not on a Mac, because WTF
+# Written for OSX
 if [ `uname` != "Darwin" ] ; then
 	echo "Requires OSX"
 	exit 1
@@ -46,7 +46,7 @@ fi
         echo ### PASTE THE FOLLOWING LINES IN YOUR .bash_profile ###
         echo $KEYCHAIN_ENTRY=$SIGSCI_EMAIL
         echo export SIGSCI_EMAIL=$(security find-generic-password -s $KEYCHAIN_ENTRY -a SIGSCI_EMAIL -w)
-        echo export SIGSCI_PASSWORD=$(security find-generic-password -s $KEYCHAIN_ENTRY -a SIGSCI_PASSWORD -w) | grep '\$'
+        echo export SIGSCI_PASSWORD=$(security find-generic-password -s $KEYCHAIN_ENTRY -a SIGSCI_PASSWORD -w)
 }
 
 Usage()
