@@ -9,7 +9,7 @@ if [ `uname` != "Darwin" ] ; then
 	exit 1
 fi
 
-version="0.1"
+version="0.2"
 
 #function to load Signal Science Credentials into Apple KeyStore
 load_keystore () {
