@@ -43,8 +43,7 @@ if [ -z "$SIGSCI_EMAIL" ] ; then
         exit 1
 fi
 	KEYCHAIN_ENTRY=$SIGSCI_EMAIL
-        echo ### PASTE THE FOLLOWING LINES IN YOUR .bash_profile ###
-        echo $KEYCHAIN_ENTRY=$SIGSCI_EMAIL
+        echo "### PASTE THE FOLLOWING LINES IN YOUR SHELL SESSION ###"
         echo export SIGSCI_EMAIL=$(security find-generic-password -s $KEYCHAIN_ENTRY -a SIGSCI_EMAIL -w)
         echo export SIGSCI_PASSWORD=$(security find-generic-password -s $KEYCHAIN_ENTRY -a SIGSCI_PASSWORD -w)
 }
