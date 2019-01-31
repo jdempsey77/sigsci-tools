@@ -15,19 +15,19 @@ version="0.2"
 load_keystore () {
         echo -n "Please enter the Signal Sciences User Name: "
         read SIGSCI_EMAIL
-        echo -n "Please enter the Signal Sciences Password: "
-        read SIGSCI_PASSWORD
+        echo -n "Please enter the Signal Sciences API Token: "
+        read SIGSCI_API_TOKEN
 	echo -n "Please enter the Signal Sciences Site: "
 	read SIGSCI_CORP
 
-if [ -z "$SIGSCI_EMAIL" ] || [ -z "$SIGSCI_PASSWORD" ] || [ -z "$SIGSCI_CORP" ]; then
+if [ -z "$SIGSCI_EMAIL" ] || [ -z "$SIGSCI_API_TOKEN" ] || [ -z "$SIGSCI_CORP" ]; then
 	echo "Unable to get all the required parameters. Unable to proceed."
 	exit 1
 fi
 
         KEYCHAIN_ENTRY=$SIGSCI_EMAIL
         security add-generic-password -c SSCI -D SIGSCI_EMAIL -a SIGSCI_EMAIL -s $KEYCHAIN_ENTRY -w $SIGSCI_EMAIL -T /usr/bin/security
-        security add-generic-password -c SSCI -D SIGSCI_PASSWORD -a SIGSCI_PASSWORD -s $KEYCHAIN_ENTRY -w "$SIGSCI_PASSWORD"
+        security add-generic-password -c SSCI -D SIGSCI_API_TOKEN -a SIGSCI_API_TOKEN -s $KEYCHAIN_ENTRY -w "$SIGSCI_API_TOKEN"
         security add-generic-password -c SSCI -D SIGSCI_CORP -a SIGSCI_CORP -s $KEYCHAIN_ENTRY -w "$SIGSCI_CORP"
 
 
@@ -51,7 +51,7 @@ fi
 	KEYCHAIN_ENTRY=$SIGSCI_EMAIL
         echo "### PASTE THE FOLLOWING LINES IN YOUR SHELL SESSION ###"
         echo export SIGSCI_EMAIL=$(security find-generic-password -s $KEYCHAIN_ENTRY -a SIGSCI_EMAIL -w)
-        echo export SIGSCI_PASSWORD=$(security find-generic-password -s $KEYCHAIN_ENTRY -a SIGSCI_PASSWORD -w)
+        echo export SIGSCI_API_TOKEN=$(security find-generic-password -s $KEYCHAIN_ENTRY -a SIGSCI_API_TOKEN -w)
         echo export SIGSCI_CORP=$(security find-generic-password -s $KEYCHAIN_ENTRY -a SIGSCI_CORP -w)
 }
 
