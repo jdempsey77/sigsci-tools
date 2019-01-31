@@ -17,7 +17,7 @@ load_keystore () {
         read SIGSCI_EMAIL
         echo -n "Please enter the Signal Sciences API Token: "
         read SIGSCI_API_TOKEN
-	echo -n "Please enter the Signal Sciences Site: "
+	echo -n "Please enter the Signal Sciences Corp: "
 	read SIGSCI_CORP
 
 if [ -z "$SIGSCI_EMAIL" ] || [ -z "$SIGSCI_API_TOKEN" ] || [ -z "$SIGSCI_CORP" ]; then
