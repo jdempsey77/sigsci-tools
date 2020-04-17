@@ -12,7 +12,7 @@ fi
 version="0.2"
 
 #function to load Signal Science Credentials into Apple KeyStore
-load_keystore () {
+save_keystore () {
         echo -n "Please enter the Signal Sciences User Name: "
         read SIGSCI_EMAIL
         echo -n "Please enter the Signal Sciences API Token: "
@@ -53,15 +53,16 @@ fi
         echo export SIGSCI_EMAIL=$(security find-generic-password -s $KEYCHAIN_ENTRY -a SIGSCI_EMAIL -w)
         echo export SIGSCI_API_TOKEN=$(security find-generic-password -s $KEYCHAIN_ENTRY -a SIGSCI_API_TOKEN -w)
         echo export SIGSCI_CORP=$(security find-generic-password -s $KEYCHAIN_ENTRY -a SIGSCI_CORP -w)
+        echo clear
 }
 
 Usage()
 {
 	cat <<EOF >&2
   $0 - [$version]  
-  Usage $0 [-k|--key] [-e|--env] [-h|--help]
-		-k|--key 		Load Signal Science Credentials into Apple Key Store
-		-e|--env 	        Load from Signal Science Credentials from Apple Key Store into Environment Variables 
+  Usage $0 [-s|--save] [-l|--load] [-h|--help]
+		-s|--save 	        Save Signal Science Credentials into Apple Key Store
+		-l|--load 	        Load from Signal Science Credentials from Apple Key Store into Environment Variables 
 		-h|--help 		Help
 EOF
 	exit 0
@@ -76,26 +77,26 @@ if [ -z "$1" ]; then
 while [ $# -gt 0 ]; do
    case "$1" in
       --help|-h) 
-         echo "Usage: $0 [-k|--key] [-e|--env] [-h|--help]"
+         echo "Usage: $0 [-s|--save] [-|--load] [-h|--help]"
          RETVAL=1
          ;;
-      --key|-k)
-         key="true"
+      --save|-s)
+         save="true"
          shift
          ;;
-      --env|-e)
-         env="true"
+      --load|-l)
+       load="true"
          shift
          ;;
    esac
    shift 1
 done
 
-if [ "$key" == "true" ]; then
-    load_keystore  
+if [ "$save" == "true" ]; then
+    save_keystore  
 fi
 
-if [ "$env" == "true" ]; then
+if [ "$load" == "true" ]; then
     load_env
 fi
 
